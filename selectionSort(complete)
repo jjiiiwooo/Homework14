@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SWAP(x,y,t) ((t)=(x), (x)=(y), (y)=(t))
+
+
+int list[20];
+int n;
+
+//정렬 과정 출력 
+void Print(int list[], int n) {
+	int i = 0;
+	for (i = 0; i < n; i++)
+	{
+		printf("%3d", list[i]);
+	}
+	printf("\n");
+}
+
+//선택정렬 
+void selection_sort(int list[], int n)
+{
+	int i, j, least, temp;
+	int MoveCount = 0; //이동횟수
+	int CompareCount = 0; //비교횟수 
+
+	for (i = 0; i < n - 1; i++) {
+		least = i;
+		// 최솟값 탐색
+		for (j = i + 1; j < n; j++) {
+			if (list[j] < list[least]) least = j;
+			CompareCount++;
+		}
+		SWAP(list[i], list[least], temp);
+		Print(list, n);
+		MoveCount++;
+
+	}
+
+	printf("MoveCount:%d\n", MoveCount);
+	printf("CompareCount:%d\n", CompareCount);
+}
+
+
+
+
+int main(void)
+{
+	int i;
+	n = 20;
+	srand(time(NULL));
+	for (i = 0; i < n; i++)      	// 난수 생성 및 출력 
+		list[i] = rand() % 100; // 난수 발생 범위 0~99
+
+	printf("Original List\n");
+	Print(list, n);
+
+	printf("선택정렬\n");
+	selection_sort(list, n);
+	printf("\n");
+
+
+	return 0;
+}
